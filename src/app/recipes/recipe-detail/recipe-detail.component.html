@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-xs-12" style="display: flex;
+  justify-content: center; margin-bottom: 20px;">
+    <img
+    [src]="recipe.imagePath"
+    alt="{{ recipe.name }}"
+    class="img-responsive recipe_image">
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12" style="margin-bottom: 15px;">
+    <h1 style="font-weight: 600;">{{ recipe.name }}</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12" style="margin-bottom: 15px;">
+    <div class="btn-group" appDropdown>
+      <button
+      type="button"
+      class="btn btn-primary dropdown-toggle">
+      Manage Recepi <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <li><a href="#">To Shopping List</a></li>
+      <li><a href="#">Edit Recepi</a></li>
+      <li><a href="#">Delite Recepi</a></li>
+    </ul>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12" style="text-align: justify; margin-bottom: 10px;">
+    {{ recipe.description}}
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <div><strong>Ingredients:</strong></div>
+    <app-recipe-ingredients *ngFor="let ingredient of recipe.ingredients" [ingredient]="ingredient"></app-recipe-ingredients>
+  </div>
+</div>

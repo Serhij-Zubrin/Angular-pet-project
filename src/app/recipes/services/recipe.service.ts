@@ -1,8 +1,10 @@
-import { EventEmitter } from "@angular/core";
+import { EventEmitter, Injectable } from "@angular/core";
 
 import { Recipe } from "../recipe.model";
 import { Ingredient } from "src/app/shared/inredient.model";
+import { ShoppingListService } from "src/app/shopping-list/services/shopping-list.service";
 
+@Injectable()
 export class RecipeService{
   recipeSelected = new EventEmitter<Recipe>();
 
@@ -14,25 +16,25 @@ export class RecipeService{
       [
         new Ingredient('Eggplant', 1),
         new Ingredient('Zucchini', 2),
-        new Ingredient('Roma tomatoes', 4),
-        new Ingredient('Crushed tomatoes', 2),
+        new Ingredient('Tomatoes', 6),
         new Ingredient('Carrot', 1),
-        new Ingredient('Garlic cloves and onion', 2),
+        new Ingredient('Onion', 1),
+        new Ingredient('Garlic', 1),
         new Ingredient('Dried herbs', 1),
-        new Ingredient('Olive oil' , 1)
+        new Ingredient('Olive oil' , 1),
       ]),
     new Recipe(
       'Million Dollar Spaghetti',
       'Most pasta dishes are rich and comforting, but only one is so good it can be called Million Dollar Spaghetti. This casserole looks like your standard pasta bake, but it eats more like lasagna—and it’s one hour (or more) quicker to make. In Million Dollar Spaghetti, the ricotta layer lends an overall creamy texture, but it’s not too heavy or rich. A thick layer of meat sauce keeps everything loose. (If you’ve had a dry spaghetti bake, you’ll know what we mean.) Did we mention there is cheese? Four kinds of cheese are in this spaghetti casserole so that every bite is ooey and gooey. Keep reading to learn how to make Million Dollar Spaghetti casserole—and leave us a review if you try it and love it.',
       'https://www.southernliving.com/thmb/jM1YjcVqzkt-Ej6pMp7qK--c_9Q=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Millionaire_Spaghetti_019-34e9c04b1ae8405088f53450a048e413.jpg',
       [
-        new Ingredient('Olive Oil', 1),
+        new Ingredient('Olive oil', 1),
         new Ingredient('Ground Beef', 2),
         new Ingredient('Onion', 4),
         new Ingredient('Garlic', 2),
         new Ingredient('Marinara Sauce', 1),
         new Ingredient('Dried Italian Seasoning', 2),
-        new Ingredient('Salt and Pepper', 1),
+        new Ingredient('Salt and pepper', 1),
         new Ingredient('Mozzarella Cheese' , 1)
       ]),
       new Recipe(
@@ -42,18 +44,23 @@ export class RecipeService{
       [
         new Ingredient('Shrimp', 1),
         new Ingredient('Butter', 2),
-        new Ingredient('Fresh garlic', 4),
         new Ingredient('Cream', 2),
         new Ingredient('Lemon juice', 1),
         new Ingredient('Fresh parsley', 2),
         new Ingredient('Salt and pepper', 1),
+        new Ingredient('Garlic', 4),
         new Ingredient('Pasta' , 1)
       ]
   )
     ];
 
+constructor(private shoppingListService: ShoppingListService){}
+
   getRecipes(){
     return this.recipes.slice();
   }
 
+  addIngredientsToShoppingList(ingredients: Ingredient[]){
+    this.shoppingListService.addIngredients(ingredients)
+  }
 }
